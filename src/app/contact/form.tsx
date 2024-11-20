@@ -1,11 +1,12 @@
 "use client";
+import { OverlayLoader } from "@/_components/overlay-loader";
 import { Button } from "@/_components/ui/button";
 import {
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,30 +26,18 @@ const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
   email: z.string().min(1, "Email is required").email("Invalid email address"),
-  phone: z
-    .string()
-    .min(1, "Phone number is required")
-    .max(10, "Can't be more than 10 digits")
-    .regex(/^\d+$/, "Phone number must contain only digits")
-    .refine((val) => !val.startsWith("0"), {
-      message: "Phone number cannot start with 0",
-    }),
   message: z.string(),
 });
 
 function ContactForm() {
-  const {
-    mutateAsync: addContactDetails,
-    isPending: isAddingDetails,
-    isError: addDetilasError,
-  } = trpc.addContactDetails.useMutation();
+  const { mutateAsync: addContactDetails, isPending: isAddingDetails } =
+    trpc.addContactDetails.useMutation();
   const formInstance = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
       email: "",
-      phone: "",
       message: "",
     },
   });
@@ -58,16 +47,18 @@ function ContactForm() {
       firstName: values.firstName,
       lastName: values.lastName,
       email: values.email,
-      phone: values.phone,
       message: values.message ?? "",
     });
     formInstance.reset();
   }
 
   return (
-    <div className="absolute flex flex-col mx-auto max-w-lg bg-slate-200 h-auto gap-10 rounded-md p-5 shadow-md inset-x-0 transform translate-y-[-50%] top-1/2 backdrop-blur-lg border-opacity-50 border-[1px] border-white">
-      <h2 className="mx-auto">Let us get back to you,</h2>
-      <FormProvider {...formInstance} >
+    <div className="flex flex-col mx-auto max-w-lg h-auto gap-10 p-5 border rounded-md my-20 bg-white relative">
+      <OverlayLoader loading={isAddingDetails} message="Please wait..." />
+      <h3 className="text-2xl mx-auto">
+        Leave us a message {isAddingDetails && "Please wait..."}
+      </h3>
+      <FormProvider {...formInstance}>
         <form
           onSubmit={formInstance.handleSubmit(onSubmit)}
           onReset={() => {
@@ -81,7 +72,7 @@ function ContactForm() {
               name="firstName"
               render={({ field }) => (
                 <RenderFormItem label="First name">
-                  <Input placeholder="Enter first name" {...field} className="border-none focus:ring-transparent"/>
+                  <Input placeholder="Enter first name" {...field} />
                 </RenderFormItem>
               )}
             />
@@ -103,22 +94,17 @@ function ContactForm() {
                 </RenderFormItem>
               )}
             />
-            <FormField
-              control={formInstance.control}
-              name="phone"
-              render={({ field }) => (
-                <RenderFormItem label="Phone number">
-                  <Input placeholder="Enter phone number" {...field} />
-                </RenderFormItem>
-              )}
-            />
           </div>
           <FormField
             control={formInstance.control}
             name="message"
             render={({ field }) => (
               <RenderFormItem label="Message">
-                <Textarea placeholder="Your messsage" {...field} />
+                <Textarea
+                  placeholder="Your messsage"
+                  {...field}
+                  className="resize-none"
+                />
               </RenderFormItem>
             )}
           />

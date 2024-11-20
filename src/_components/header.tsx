@@ -1,11 +1,25 @@
 "use client";
 
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { NavMenu } from "./nav-menubar";
 
 function Header() {
   const [scrolledToTop, setScrolledToTop] = useState(true);
+  const pathname = usePathname();
+
+  const { textColor, navItemColor } = useMemo(() => {
+    if (pathname === "/volunteer" || pathname === "/contact") {
+      if (!scrolledToTop) {
+        return { textColor: "text-[#ffffff]", navItemColor: "text-[#ffffff]" };
+      }
+      return { textColor: "text-black", navItemColor: "text-black" };
+    }
+    
+    return { textColor: "text-[#ffffff]", navItemColor: "text-[#ffffff]" };
+  }, [pathname, scrolledToTop]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,36 +41,32 @@ function Header() {
       }`}
     >
       <div className="flex min-h-14 w-full md:w-3/5 lg:w-4/5 p-3 md:p-0 justify-between items-center m-2">
-        <Link href={"/"} className="text-white font-semibold text-xl">
+        <Link href={"/"} className={`${textColor} font-semibold text-xl`}>
           Sankalpa USA
         </Link>
         <nav className="hidden md:block w-auto">
-          <ul className="flex w-auto gap-6 group">
-            <li className="text-[#ffffff]">
-              <Link className="font-semibold" href={"/donation"}>
-                Donate
-              </Link>
+          <ul className={`flex w-auto gap-6 group ${navItemColor}`}>
+            <li>
+              <Link href={"/donation"}>Donate</Link>
             </li>
-            <li className="text-[#ffffff]">
-              <Link className="font-semibold" href={"/members"}>
-                Members
-              </Link>
+            <li>
+              <Link href={"/members"}>Members</Link>
             </li>
-            <li className="text-[#ffffff]">
-              <Link className="font-semibold" href={"/volunteers"}>
-                Volunteers
-              </Link>
+            <li>
+              <Link href={"/volunteer"}>Volunteers</Link>
             </li>
-            <li className="text-[#ffffff]">
-              <Link className="font-semibold" href={"/events"}>
-                Events
-              </Link>
+            <li>
+              <Link href={"/events"}>Events</Link>
             </li>
-            <li className="text-[#ffffff]">
-              <Link className="font-semibold" href={"/contact"}>
-                Contact us
-              </Link>
+            <li>
+              <Link href={"/contact"}>Contact us</Link>
             </li>
+            <SignedOut>
+              <SignInButton mode="modal" forceRedirectUrl={"/pricing"} />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </ul>
         </nav>
         <div className="flex md:hidden">

@@ -1,77 +1,71 @@
 {
-  "id": "6ffc4647-8ab0-4bd1-9523-e90b66cef7db",
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "9f115b34-851e-4efe-9edc-8c739b72b1e5",
   "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "7",
-  "dialect": "postgresql",
   "tables": {
-    "public.visitor-table": {
-      "name": "visitor-table",
-      "schema": "",
+    "users": {
+      "name": "users",
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "integer",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "autoincrement": false
         },
-        "firsName": {
-          "name": "firsName",
+        "firstName": {
+          "name": "firstName",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "autoincrement": false
         },
         "lastName": {
           "name": "lastName",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "autoincrement": false
         },
         "email": {
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
-        },
-        "phone": {
-          "name": "phone",
-          "type": "varchar(10)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
-          "primaryKey": false,
           "notNull": true,
-          "default": "now()"
+          "autoincrement": false
         },
         "message": {
           "name": "message",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "autoincrement": false
         }
       },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "visitor-table_email_unique": {
-          "name": "visitor-table_email_unique",
-          "nullsNotDistinct": false,
+      "indexes": {
+        "users_email_unique": {
+          "name": "users_email_unique",
           "columns": [
             "email"
-          ]
+          ],
+          "isUnique": true
         }
-      }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
     }
   },
+  "views": {},
   "enums": {},
-  "schemas": {},
-  "sequences": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
   }
 }

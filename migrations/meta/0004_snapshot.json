@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "99f25399-e19a-437c-9c74-a159d5fa5392",
-  "prevId": "9f115b34-851e-4efe-9edc-8c739b72b1e5",
+  "id": "f6326c38-90af-46eb-ad01-1c73a695ca20",
+  "prevId": "d3316d77-7c05-44b1-9020-8d00b645237f",
   "tables": {
     "users": {
       "name": "users",
@@ -57,6 +57,51 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
+    "children": {
+      "name": "children",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "memberId": {
+          "name": "memberId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "childrenData": {
+          "name": "childrenData",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "children_memberId_Members_id_fk": {
+          "name": "children_memberId_Members_id_fk",
+          "tableFrom": "children",
+          "tableTo": "Members",
+          "columnsFrom": [
+            "memberId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
     "Members": {
       "name": "Members",
       "columns": {
@@ -67,18 +112,60 @@
           "notNull": true,
           "autoincrement": false
         },
-        "firstName": {
-          "name": "firstName",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "lastName": {
-          "name": "lastName",
+        "spouse_name": {
+          "name": "spouse_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "address": {
+          "name": "address",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
+          "autoincrement": false
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "state": {
+          "name": "state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "zip": {
+          "name": "zip",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "telephone_no": {
+          "name": "telephone_no",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "spouse_telephone_no": {
+          "name": "spouse_telephone_no",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "email": {
@@ -88,174 +175,36 @@
           "notNull": true,
           "autoincrement": false
         },
-        "phoneNumber": {
-          "name": "phoneNumber",
+        "spouse_email": {
+          "name": "spouse_email",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "membershipId": {
-          "name": "membershipId",
+        "date_of_birth": {
+          "name": "date_of_birth",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "membershipType": {
-          "name": "membershipType",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "joinDate": {
-          "name": "joinDate",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "status": {
-          "name": "status",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'Active'"
-        },
-        "addressLine1": {
-          "name": "addressLine1",
+        "spouse_date_of_birth": {
+          "name": "spouse_date_of_birth",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "addressLine2": {
-          "name": "addressLine2",
+        "anniversary": {
+          "name": "anniversary",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
-        },
-        "city": {
-          "name": "city",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "state": {
-          "name": "state",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "postalCode": {
-          "name": "postalCode",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "country": {
-          "name": "country",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "role": {
-          "name": "role",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "assignedProjects": {
-          "name": "assignedProjects",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "dateOfBirth": {
-          "name": "dateOfBirth",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "profilePicture": {
-          "name": "profilePicture",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "skills": {
-          "name": "skills",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "donationFrequency": {
-          "name": "donationFrequency",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "lastDonationDate": {
-          "name": "lastDonationDate",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "totalDonations": {
-          "name": "totalDonations",
-          "type": "real",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": 0
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'CURRENT_TIMESTAMP'"
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'CURRENT_TIMESTAMP'"
         }
       },
-      "indexes": {
-        "Members_email_unique": {
-          "name": "Members_email_unique",
-          "columns": [
-            "email"
-          ],
-          "isUnique": true
-        },
-        "Members_membershipId_unique": {
-          "name": "Members_membershipId_unique",
-          "columns": [
-            "membershipId"
-          ],
-          "isUnique": true
-        }
-      },
+      "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},

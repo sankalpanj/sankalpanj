@@ -1,1 +1,0 @@
-ALTER TABLE "visitor-table" ADD COLUMN "isdCode" varchar(2) NOT NULL;

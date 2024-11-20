@@ -1,10 +1,10 @@
-
+import { Footer } from "@/_components/footer";
+import { Header } from "@/_components/header";
 import Provider from "@/lib/trpc/provider";
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import Head from "next/head";
 import "./globals.css";
-import { Header } from "@/_components/header";
-import { Footer } from "@/_components/footer";
 
 export const metadata: Metadata = {
   title: "Sankalpa USA",
@@ -23,9 +23,11 @@ export default function RootLayout({
       </Head>
       <body className="flex flex-col grow w-full overflow-y-auto">
         <Provider>
-          <Header />
-          {children}
-          <Footer />
+          <ClerkProvider>
+            <Header />
+            {children}
+            <Footer />
+          </ClerkProvider>
         </Provider>
       </body>
     </html>

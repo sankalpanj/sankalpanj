@@ -110,7 +110,7 @@ label {
 }
 
 .volunteer-container {
-  background-image: url("../../public/images/volunteer_banner.png");
+  background-image: url("/images/volunteer_banner.png");
   object-fit: cover;
   width: 100%;
   background-repeat: no-repeat;

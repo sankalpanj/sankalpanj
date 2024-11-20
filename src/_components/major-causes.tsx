@@ -9,18 +9,18 @@ export interface CauseItem {
 
 function RenderCauseItems({ label, image, description }: CauseItem) {
   return (
-    <div className="flex flex-col h-full w-full rounded-xl p-5 bg-[#f9fafc] hover:shadow-lg items-center transition-all duration-300 ease-linear delay-0">
+    <div className="flex flex-col h-5/6 w-full rounded-xl p-5  bg-[#f9fafc] hover:shadow-lg items-center justify-start transition-all duration-300 ease-linear delay-0 gap-3">
       <label htmlFor="" className="font-semibold align-top">
         {label}
       </label>
       <Image
         src={image}
-        className="object-contain rounded-xl pt-5"
-        height={image.height - 500}
-        width={image.width - 500}
+        className="rounded-xl h-4/6 w-full object-fill"
+        height={300}
+        width={500}
         alt={label.toLowerCase()}
       />
-      <p className="pt-5 text-[#777777]">{description}</p>
+      <p className="text-[#777777]">{description}</p>
     </div>
   );
 }

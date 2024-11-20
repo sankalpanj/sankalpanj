@@ -4,7 +4,7 @@ import { CalendarDays, Clock2, MapPin } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
-interface SocialEventProps {
+export interface SocialEventProps {
   image: StaticImageData;
   label: string;
   description: string;
@@ -26,6 +26,8 @@ function RenderSocialEventCard({
         <Image
           src={image.src}
           alt="event-img"
+          width={500}
+          height={500}
           className="float-left w-2/5 h-auto object-cover rounded-md mr-2"
         />
         <label htmlFor="event-label" className="font-semibold text-[#072366]">
@@ -35,10 +37,7 @@ function RenderSocialEventCard({
           id="event-label"
           className="pt-2 text-sm text-[#808080] leading-relaxed"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-          blanditiis illum similique saepe voluptatibus, dolor laboriosam quo
-          rem temporibus eum assumenda esse maiores praesentium ducimus autem
-          officiis sit laudantium dolore.
+          {description}
         </p>
         <div className="flex w-full justify-between items-center py-3">
           <div className="flex w-auto gap-1 items-center text-[#808080]">
