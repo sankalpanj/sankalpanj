@@ -8,7 +8,6 @@ import FoodDriveA from "../../public/images/foodDrive/FoodDrive2022_01.jpg";
 import PicnicA from "../../public/images/Picnic/Picnic2021_1.jpg";
 import ToyDriveA from "../../public/images/toyDrive/ToyDrive2021_01.jpg";
 import TreePlantationA from "../../public/images/tree_plantation/tree_plantation_a.jpeg";
-import { SocialEventProps } from "@/_components/social-event";
 
 const CASUE_ITEMS: CauseItem[] = [
   {
@@ -30,7 +29,6 @@ const CASUE_ITEMS: CauseItem[] = [
     image: FoodDriveA,
   },
 ];
-
 
 const VOLUNTEER_ITEMS: VolunteerDetail[] = [
   {
