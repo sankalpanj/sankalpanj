@@ -204,6 +204,11 @@ function MembershipForm({ open, close }: Props) {
           spouseTelephone: values.spouseTelephoneNo || null,
           id: crypto.randomUUID(),
           createdAt: new Date().toISOString(),
+          status: "pending",
+          membershipStartDate: new Date().toISOString(),
+          membershipEndDate: "",
+          amount: 0,
+          paymentDate: ""
         },
       },
       {
