@@ -210,6 +210,11 @@ function AuthForm({ open, close }: Props) {
               state: "",
               telephone: "",
               zip: "",
+              membershipStartDate: new Date().toISOString(),
+              membershipEndDate: "",
+              amount: 0,
+              status: "pending",
+              paymentDate: ""
             },
           });
         }
