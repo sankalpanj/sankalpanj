@@ -6,7 +6,7 @@ config({ path: ".env" });
 console.log(process.env.TURSO_CONNECTION_URL);
 
 export default defineConfig({
-  schema: ["./src/db/schema.ts", "./src/db/member-schema.ts"],
+  schema: ["./src/db/schema.ts"],
   out: "./migrations",
   dialect: "turso",
   dbCredentials: {

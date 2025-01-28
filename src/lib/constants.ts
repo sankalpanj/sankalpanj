@@ -9,6 +9,12 @@ import PicnicA from "../../public/images/Picnic/Picnic2021_1.jpg";
 import ToyDriveA from "../../public/images/toyDrive/ToyDrive2021_01.jpg";
 import TreePlantationA from "../../public/images/tree_plantation/tree_plantation_a.jpeg";
 
+export interface Member {
+  name: string;
+  designation: string;
+  imageSrc: string;
+}
+
 const CASUE_ITEMS: CauseItem[] = [
   {
     label: "Biodiversity Improvement",
@@ -118,4 +124,77 @@ const FEATURED_EVENTS: EventDetail[] = [
   },
 ];
 
-export { CASUE_ITEMS, FEATURED_EVENTS, VOLUNTEER_ITEMS };
+const MEMBERS: Member[] = [
+  {
+    name: "Nemai Ghosh",
+    designation: "Vice President & Treasurer",
+    imageSrc: "/images/members/ng_vp_t.jpeg",
+  },
+  {
+    name: "Rini Ganguly",
+    designation: "Advisor",
+    imageSrc: "/images/members/rg_adv.jpeg",
+  },
+  {
+    name: "Venky Neelakantan",
+    designation: "Chief Environmental Officer",
+    imageSrc: "/images/members/vkn_chief_env_of.jpeg",
+  },
+  {
+    name: "Sukanya Ghosh",
+    designation: "Member",
+    imageSrc: "/images/members/sk_gh.jpeg",
+  },
+  {
+    name: "Ajit Parhi",
+    designation: "Member",
+    imageSrc: "/images/members/aj_ph.jpeg",
+  },
+  {
+    name: "Anamika Banerjee",
+    designation: "President",
+    imageSrc: "/images/members/anmk_bnj_presd.jpeg",
+  },
+  {
+    name: "Biswajit Santra",
+    designation: "Member",
+    imageSrc: "/images/members/bs_snt.jpeg",
+  },
+  {
+    name: "Gangotri Dey",
+    designation: "Member",
+    imageSrc: "/images/members/Gng_dey.jpeg",
+  },
+  {
+    name: "Ayona Biswas",
+    designation: "Member",
+    imageSrc: "/images/members/ay_bsw.jpeg",
+  },
+  {
+    name: "Shantanu Dev",
+    designation: "Advisor",
+    imageSrc: "/images/members/sh_dev.jpeg",
+  },
+  {
+    name: "Koustav Ghosal",
+    designation: "Member",
+    imageSrc: "/images/members/kv_gh.jpeg",
+  },
+  {
+    name: "Suvendra Chakrabarti",
+    designation: "Member",
+    imageSrc: "/images/members/suvendra.jpeg",
+  },
+  {
+    name: "Jaya Chakrabarti",
+    designation: "Member",
+    imageSrc: "/images/members/jaya.jpeg",
+  },
+  {
+    name: "Bishakha Ghoshal",
+    designation: "Secretary",
+    imageSrc: "/images/members/bisakha.jpeg",
+  },
+];
+
+export { CASUE_ITEMS, FEATURED_EVENTS, VOLUNTEER_ITEMS, MEMBERS };

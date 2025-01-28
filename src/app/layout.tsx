@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import Head from "next/head";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Sankalpa USA",
@@ -26,6 +27,7 @@ export default function RootLayout({
           <ClerkProvider>
             <Header />
             {children}
+            <Toaster />
             <Footer />
           </ClerkProvider>
         </Provider>

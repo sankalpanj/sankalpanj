@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc/client";
+import { Children } from "@/lib/zod-types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MinusCircleIcon, PlusCircleIcon } from "lucide-react";
 import { Dispatch, SetStateAction, useMemo, useState } from "react";
@@ -42,7 +43,10 @@ export const formSchema = z.object({
   city: z.string().min(1, "City is required"),
   state: z.string().min(1, "State is required"),
   zip: z.string().regex(/^\d{4,6}$/, "Invalid ZIP code format"),
-  telephoneNo: z.string().regex(/^\d{10}$/, "Invalid telephone number"),
+  telephoneNo: z
+    .string()
+    .min(1, "Phone number is required")
+    .regex(/^\d{10}$/, "Invalid telephone number"),
   spouseTelephoneNo: z.string().optional().nullable(),
   email: z.string().email("Invalid email format"),
   spouseEmail: z.string().email("Invalid email format").optional().nullable(),
@@ -129,7 +133,7 @@ function MembershipForm({ open, close }: Props) {
   const { mutateAsync: saveMemberDetails, isPending: savingDetails } =
     trpc.addMember.useMutation();
   const { mutateAsync: saveChildrenDetails, isPending: savingChildrenDetails } =
-    trpc.addChildrenDetails.useMutation();
+    trpc.addChildren.useMutation();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -184,38 +188,53 @@ function MembershipForm({ open, close }: Props) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await saveMemberDetails(
       {
-        name: values.name,
-        spouseName: values.spouseName || null,
-        address: values.address,
-        city: values.city,
-        state: values.state,
-        zip: values.zip,
-        telephoneNo: values.telephoneNo,
-        email: values.email,
-        spouseEmail: values.spouseEmail || null,
-        dateOfBirth: values.dateOfBirth,
-        spouseDateOfBirth: values.spouseDateOfBirth || null,
-        anniversary: values.anniversary || null,
-        spouseTelephoneNo: values.spouseTelephoneNo,
-        id: crypto.randomUUID(),
+        payload: {
+          name: values.name,
+          spouseName: values.spouseName || null,
+          address: values.address,
+          city: values.city,
+          state: values.state,
+          zip: values.zip,
+          telephone: values.telephoneNo,
+          email: values.email,
+          spouseEmail: values.spouseEmail || null,
+          dateOfBirth: values.dateOfBirth,
+          spouseDateOfBirth: values.spouseDateOfBirth || null,
+          anniversary: values.anniversary || null,
+          spouseTelephone: values.spouseTelephoneNo || null,
+          id: crypto.randomUUID(),
+          createdAt: new Date().toISOString(),
+        },
       },
       {
         onSuccess: async (data) => {
-          await saveChildrenDetails(
-            {
-              children: JSON.stringify(values.children),
-              id: crypto.randomUUID(),
-              memberId: data.id,
-            },
-            {
-              onSuccess: (data) => {
-                console.log("CHILDREN_DETAILS_ADDED");
+          if (data.code === "SUCCESS" && data.memberId && values.children) {
+            const children: Children = [];
+            values.children.forEach((child) => {
+              if (child) {
+                children.push({
+                  name: child.name,
+                  dateOfBirth: child.dateOfBirth,
+                  age: "" + child.age,
+                  id: crypto.randomUUID(),
+                  memberId: data.memberId,
+                });
+              }
+            });
+            await saveChildrenDetails(
+              {
+                payload: [...children],
               },
-              onError: (err) => {
-                console.error("ADD_CHILDREN_ERROR: ", err);
-              },
-            }
-          );
+              {
+                onSuccess: (data) => {
+                  setFormIdx(0);
+                },
+                onError: (err) => {
+                  console.error("ADD_CHILDREN_ERROR: ", err);
+                },
+              }
+            );
+          }
           form.reset();
           close(false);
         },
@@ -297,6 +316,7 @@ function MembershipForm({ open, close }: Props) {
                             <FormControl>
                               <Input
                                 type="text"
+                                required
                                 placeholder="In format (MM/DD/YYYY)"
                                 {...field}
                               />
@@ -336,6 +356,7 @@ function MembershipForm({ open, close }: Props) {
                               <Input
                                 placeholder="Enter your phone number"
                                 {...field}
+                                type="number"
                                 minLength={1}
                                 maxLength={10}
                               />
@@ -565,7 +586,7 @@ function MembershipForm({ open, close }: Props) {
               {formIdx === 2 && (
                 <Button variant={"outline"} size={"sm"} type="submit">
                   {savingDetails || savingChildrenDetails
-                    ? "Please wait..."
+                    ? "Saving..."
                     : "Submit"}
                 </Button>
               )}

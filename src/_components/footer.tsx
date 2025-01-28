@@ -26,7 +26,7 @@ function Footer() {
           <Link href={"/events"} className="text-[#918e8e] text-[15px]">
             Events
           </Link>
-          <Link href={""} className="text-[#918e8e] text-[15px]">
+          <Link href={"/contact"} className="text-[#918e8e] text-[15px]">
             Contact us
           </Link>
         </div>

@@ -30,8 +30,8 @@ const formSchema = z.object({
 });
 
 function ContactForm() {
-  const { mutateAsync: addContactDetails, isPending: isAddingDetails } =
-    trpc.addContactDetails.useMutation();
+  const { mutateAsync: addContact, isPending: isAddingContact } =
+    trpc.addContact.useMutation();
   const formInstance = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,20 +43,23 @@ function ContactForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    await addContactDetails({
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      message: values.message ?? "",
+    await addContact({
+      payload: {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        message: values.message ?? "",
+        createdAt: new Date().toISOString(),
+      },
     });
     formInstance.reset();
   }
 
   return (
     <div className="flex flex-col mx-auto max-w-lg h-auto gap-10 p-5 border rounded-md my-20 bg-white relative">
-      <OverlayLoader loading={isAddingDetails} message="Please wait..." />
+      <OverlayLoader loading={isAddingContact} message="Please wait..." />
       <h3 className="text-2xl mx-auto">
-        Leave us a message {isAddingDetails && "Please wait..."}
+        Leave us a message {isAddingContact && "Please wait..."}
       </h3>
       <FormProvider {...formInstance}>
         <form
