@@ -20,6 +20,10 @@ const members = sqliteTable("members", {
   amount: integer("amount").default(0), // Amount in cents stored as number
   status: text("status").default('pending'), // 'completed', 'pending', 'failed', etc
   paymentDate: text("payment_date").default(''), // When payment was made/attempted
+  stripeCustomerId: text("stripe_customer_id").default(''), // Stripe customer ID
+  stripeSubscriptionId: text("stripe_subscription_id").default(''), // Stripe subscription ID
+  stripePlanId: text("stripe_plan_id").default(''), // Stripe plan ID
+  stripeProductId: text("stripe_product_id").default(''), // Stripe product ID
 });
 
 const children = sqliteTable("children", {

@@ -1,9 +1,19 @@
 import { db } from "@/db";
 import { children, contacts, members, payments } from "@/db/schema";
-import { childrenSchema, childSchema, contactSchema, memberSchema, paymentSchema } from "@/lib/zod-types";
+import {
+  childrenSchema,
+  childSchema,
+  contactSchema,
+  memberSchema,
+  paymentSchema,
+  StripePaymentIntentListSchema,
+} from "@/lib/zod-types";
 import { desc, eq } from "drizzle-orm";
+import Stripe from "stripe";
 import { z } from "zod";
 import { procedure, router } from "../trpc";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export const appRouter = router({
   addMember: procedure
@@ -68,7 +78,9 @@ export const appRouter = router({
           .where(eq(members.id, userId));
 
         if (records.length > 0) {
-          const { success, data } = memberSchema.safeParse(records);
+          const { success, data, error } = memberSchema.safeParse(records[0]);
+
+          console.log(error);
 
           if (success) {
             return {
@@ -108,7 +120,7 @@ export const appRouter = router({
     )
     .mutation(async ({ input }) => {
       try {
-        const {rowsAffected} = await db
+        const { rowsAffected } = await db
           .update(members)
           .set({
             name: input.name,
@@ -140,14 +152,10 @@ export const appRouter = router({
     }),
 
   addChild: procedure
-    .input(
-      z.array(childSchema)
-    )
+    .input(z.array(childSchema))
     .mutation(async ({ input }) => {
       try {
-        const { rowsAffected } = await db.insert(children).values(
-          [...input]
-        );
+        const { rowsAffected } = await db.insert(children).values([...input]);
 
         if (rowsAffected > 0) {
           return {
@@ -263,19 +271,19 @@ export const appRouter = router({
           console.log("PAYMENT_VALIDATION_ERROR: ", error);
           return {
             code: "FAILED",
-            data: []
+            data: [],
           } as const;
         }
 
         return {
           code: "SUCCESS",
-          data: data
+          data: data,
         } as const;
       } catch (err) {
         console.log("GET_PAYMENTS_ERROR: ", err);
         return {
           code: "FAILED",
-          data: []
+          data: [],
         } as const;
       }
     }),
@@ -296,6 +304,125 @@ export const appRouter = router({
         console.log("ADD_CONTACT_ERROR: ", err);
         return {
           code: "FAILED",
+        } as const;
+      }
+    }),
+  generatePlanChangeSessionUrl: procedure
+    .input(z.object({ customerId: z.string() }))
+    .mutation(async ({ input }) => {
+      const { customerId } = input;
+      try {
+        const session = await stripe.billingPortal.sessions.create({
+          customer: customerId,
+          return_url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/subscriptions`,
+        });
+        return {
+          code: "SUCCESS",
+          data: session.url,
+        } as const;
+      } catch (err) {
+        console.log("GENERATE_PLAN_CHANGE_SESSION_URL_ERROR: ", err);
+        return {
+          code: "FAILED",
+          data: null,
+        } as const;
+      }
+    }),
+  generateOneTimeDonationSessionUrl: procedure
+    .input(z.object({ amount: z.number() }))
+    .mutation(async ({ input }) => {
+      const { amount } = input;
+      try {
+        const { url } = await stripe.checkout.sessions.create({
+          line_items: [
+            {
+              price_data: {
+                currency: "usd",
+                product_data: {
+                  name: "One-Time Donation",
+                },
+                unit_amount: amount * 100,
+              },
+              quantity: 1,
+            },
+          ],
+          success_url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${process.env.NEXT_PUBLIC_APP_DOMAIN}/donation`,
+          mode: "payment",
+        });
+        return {
+          code: "SUCCESS",
+          data: url,
+        } as const;
+      } catch (err) {
+        console.log("GENERATE_ONE_TIME_DONATION_SESSION_URL_ERROR: ", err);
+        return {
+          code: "FAILED",
+          data: null,
+        } as const;
+      }
+    }),
+  getPaymentHistoryByCustomerId: procedure
+    .input(z.string())
+    .query(async ({ input }) => {
+      try {
+        const transactions = await stripe.paymentIntents.list({
+          customer: input,
+          limit: 10,
+        });
+
+        console.log(transactions)
+
+        const { error, data } =
+          StripePaymentIntentListSchema.safeParse(transactions);
+
+        if (error) {
+          console.error("payment history parse error: ", error);
+          return {
+            code: "FAILED",
+            data: null,
+          } as const;
+        }
+
+        return {
+          code: "SUCCESS",
+          data: data,
+        } as const;
+      } catch (err) {
+        console.log("payment history get error: ", err);
+        return {
+          code: "FAILED",
+          data: null,
+        } as const;
+      }
+    }),
+  updateSubscription: procedure
+    .input(
+      z.object({
+        subscriptionId: z.string(),
+        items: z.array(z.object({
+          id: z.string(),
+          quantity: z.number().min(1),
+        })),
+      })
+    )
+    .mutation(async ({ input }) => {
+      try {
+        const subscription = await stripe.subscriptions.update(input.subscriptionId, {
+          items: input.items,
+          cancel_at_period_end: true,
+          proration_behavior: "none"
+        });
+
+        return {
+          code: "SUCCESS",
+          data: subscription,
+        } as const;
+      } catch (err) {
+        console.log("UPDATE_SUBSCRIPTION_ERROR: ", err);
+        return {
+          code: "FAILED",
+          data: null,
         } as const;
       }
     }),

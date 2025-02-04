@@ -18,8 +18,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { MemberAndChildren } from "@/lib/zod-types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import dayjs from "dayjs";
+import tz from "dayjs/";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+dayjs.extend(tz);
 
 interface Props {
   profileDetails: MemberAndChildren;
@@ -45,9 +49,10 @@ function MembershipSetting({ profileDetails }: Props) {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      membershipStartDate: profileDetails.membershipStartDate || "N/A",
+      membershipStartDate:
+        dayjs(profileDetails.membershipStartDate).format("MM-DD-YYYY") || "N/A",
       membershipEndDate: profileDetails.membershipEndDate || "N/A",
-      amount: profileDetails.amount,
+      amount: profileDetails.amount / 100,
       status:
         statusOptions[profileDetails.status as keyof typeof statusOptions] ||
         "N/A",
@@ -100,7 +105,7 @@ function MembershipSetting({ profileDetails }: Props) {
               name="amount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Amount</FormLabel>
+                  <FormLabel>Amount (in dollars)</FormLabel>
                   <FormControl>
                     <Input type="number" {...field} />
                   </FormControl>

@@ -189,7 +189,6 @@ function AuthForm({ open, close }: Props) {
         code,
       });
 
-      await signUp.reload();
       if (verificationRes.status === "complete") {
         const { firstName, lastName, email } = signUpForm.getValues();
         if (verificationRes.createdUserId) {
@@ -210,13 +209,18 @@ function AuthForm({ open, close }: Props) {
               state: "",
               telephone: "",
               zip: "",
-              membershipStartDate: new Date().toISOString(),
+              membershipStartDate: "",
               membershipEndDate: "",
               amount: 0,
               status: "pending",
-              paymentDate: ""
+              paymentDate: "",
+              stripeCustomerId: "",
+              stripeSubscriptionId: "",
+              stripePlanId: "",
+              stripeProductId: "",
             },
           });
+          await signUp.reload();
         }
         close(false);
       }
@@ -286,26 +290,28 @@ function AuthForm({ open, close }: Props) {
                   }}
                 />
               </div>
-              <div className="flex w-full mt-8 justify-end">
+              <div className="flex w-full mt-8 justify-between">
+                <div className="flex w-full gap-3 items-center">
+                  <p className="text-sm font-semibold">
+                    Don&apos;t have an account ?
+                  </p>
+                  <Button
+                    size={"sm"}
+                    variant={"link"}
+                    onClick={() => {
+                      setForm("signup");
+                    }}
+                  >
+                    <p className="text-base text-[#1971c2] font-semibold">
+                      Sign up
+                    </p>
+                  </Button>
+                </div>
                 <Button type="submit">
                   {signingIn ? "Signing in..." : "Sign in"}
                 </Button>
               </div>
             </form>
-            <div className="flex w-full gap-3 items-center">
-              <p className="text-base font-semibold">
-                Don&apos;t have an account ?
-              </p>
-              <Button
-                size={"sm"}
-                variant={"link"}
-                onClick={() => {
-                  setForm("signup");
-                }}
-              >
-                <p className="text-lg text-[#1971c2] font-semibold">Sign up</p>
-              </Button>
-            </div>
           </Form>
         )}
         {form === "signup" && (
@@ -458,9 +464,25 @@ function AuthForm({ open, close }: Props) {
                     );
                   }}
                 />
-                <Button className="ml-auto" type="submit">
-                  {signingUp ? "Please wait..." : "Sign up"}
-                </Button>
+                <div className="flex w-full justify-between">
+                  <div className="flex w-full gap-3 items-center">
+                    <p className="text-sm font-semibold">Have an account ?</p>
+                    <Button
+                      size={"sm"}
+                      variant={"link"}
+                      onClick={() => {
+                        setForm("signin");
+                      }}
+                    >
+                      <p className="text-base text-[#1971c2] font-semibold">
+                        Sign in
+                      </p>
+                    </Button>
+                  </div>
+                  <Button className="ml-auto" type="submit">
+                    {signingUp ? "Please wait..." : "Sign up"}
+                  </Button>
+                </div>
               </div>
             </form>
           </Form>

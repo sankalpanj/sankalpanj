@@ -33,6 +33,10 @@ export default async function UserProfile(props: Props) {
       amount: members.amount,
       status: members.status,
       paymentDate: members.paymentDate,
+      stripeCustomerId: members.stripeCustomerId,
+      stripeSubscriptionId: members.stripeSubscriptionId,
+      stripePlanId: members.stripePlanId,
+      stripeProductId: members.stripeProductId
     })
     .from(members)
     .where(eq(members.id, userId));
@@ -61,7 +65,11 @@ export default async function UserProfile(props: Props) {
     ...records[0],
   };
 
+  console.log(record);
+
   const { data, error } = memberAndChildrenSchema.safeParse(record);
+  console.log(data);
+  console.log(error);
 
   if (error) {
     return null;

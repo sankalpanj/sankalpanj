@@ -1,60 +1,69 @@
 "use-client";
 
-import { CalendarDays, Clock2, MapPin } from "lucide-react";
-import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
+import { MapPin } from "lucide-react";
+import { ImageCarousel } from "./image-carousel";
 
 export interface SocialEventProps {
-  image: StaticImageData;
+  images: string[];
   label: string;
-  description: string;
-  dateTime: string;
+  description: string[];
   place: string;
 }
 
 function RenderSocialEventCard({
-  image,
+  images,
   label,
   description,
-  dateTime,
   place,
 }: SocialEventProps) {
-  const [date, time] = dateTime.split("|");
-  return (
-    <Link href={"/"}>
-      <div className="h-auto w-full rounded-lg p-2 bg-[#f9fafc] hover:shadow-lg transition-all duration-300 ease-linear delay-0">
-        <Image
-          src={image.src}
-          alt="event-img"
-          width={500}
-          height={500}
-          className="float-left w-2/5 h-auto object-cover rounded-md mr-2"
-        />
-        <label htmlFor="event-label" className="font-semibold text-[#072366]">
+  if (description.length === 0) {
+    return (
+      <div className="flex flex-col h-auto w-full max-w-md rounded-lg p-2 bg-[#f9fafc] gap-3 border">
+        <label
+          htmlFor="event-label"
+          className="font-semibold text-[#072366] mb-5"
+        >
           {label}
         </label>
-        <p
-          id="event-label"
-          className="pt-2 text-sm text-[#808080] leading-relaxed"
-        >
-          {description}
-        </p>
+        <ImageCarousel images={images} />
         <div className="flex w-full justify-between items-center py-3">
-          <div className="flex w-auto gap-1 items-center text-[#808080]">
-            <Clock2 className="text-inherit w-4 h-4" />
-            <p className="text-sm">{time}</p>
-          </div>
-          <div className="flex w-auto gap-1 items-center text-[#808080]">
-            <CalendarDays className="text-inherit w-4 h-4" />
-            <p className="text-sm">{date}</p>
-          </div>
           <div className="flex w-auto gap-1 items-center text-[#808080]">
             <MapPin className="text-inherit w-4 h-4" />
             <p className="text-sm">{place}</p>
           </div>
         </div>
       </div>
-    </Link>
+    );
+  }
+  return (
+    <div className="flex flex-col h-auto w-full rounded-lg p-2 bg-[#f9fafc] gap-3 border">
+      <div className="flex w-full gap-8">
+        <ImageCarousel images={images} />
+        <div className="flex flex-col">
+          <label
+            htmlFor="event-label"
+            className="font-semibold text-[#072366] mb-5"
+          >
+            {label}
+          </label>
+          {description.map((desc, index) => (
+            <p
+              key={index}
+              id="event-label"
+              className="pt-2 text-base text-[#808080] leading-relaxed font-semibold"
+            >
+              {desc}
+            </p>
+          ))}
+        </div>
+      </div>
+      <div className="flex w-full justify-between items-center py-3">
+        <div className="flex w-auto gap-1 items-center text-[#808080]">
+          <MapPin className="text-inherit w-4 h-4" />
+          <p className="text-sm">{place}</p>
+        </div>
+      </div>
+    </div>
   );
 }
 

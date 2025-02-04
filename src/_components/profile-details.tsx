@@ -56,7 +56,7 @@ function RenderUserProfileSettings({ userProfile }: Props) {
           <MembershipSetting profileDetails={userProfile} />
         </TabsContent>
         <TabsContent value="payment" className="h-full w-full">
-          <PaymentHistory  />
+          <PaymentHistory userProfile={userProfile} />
         </TabsContent>
         <TabsContent value="events" className="h-full w-full">
           <Events />

@@ -11,17 +11,19 @@ function RenderEventItem({
   eventDetail: { label, description, image },
 }: Props) {
   return (
-    <div className="flex flex-col h-auto w-auto rounded-lg hover:shadow-md bg-teal-500 gap-2">
+    <div className="flex flex-col w-full gap-5 object-contain justify-start">
       <Image
-        alt="sample"
+        alt={label}
         src={image.src}
         width={image.width}
-        height={image.height}
-        className="rounded-lg object-cover h-3/6"
+        height={300}
+        className="w-full max-w-xl h-3/5 rounded-lg"
       />
-      <div className="flex flex-col h-auto px-3 text-white rounded-b-lg gap-1">
-        <p className="text-lg font-semibold">{label}</p>
-        <p className="text-base text-white">{description}</p>
+      <div className="flex flex-col grow px-3 rounded-b-lg gap-5">
+        <p className="text-xl font-semibold">{label}</p>
+        <p className="text-base h-full max-h-fit truncate max-w-md line-clamp-5 text-wrap">
+          {description}
+        </p>
       </div>
     </div>
   );

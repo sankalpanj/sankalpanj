@@ -5,8 +5,8 @@ import FvRunA from "../../public/images/5kRun/5KRun_1.jpg";
 import BiodiversityImpvA from "../../public/images/biodiversity/biodiversity_a.jpeg";
 import BiodiversityImpvB from "../../public/images/biodiversityImpvB.jpg";
 import FoodDriveA from "../../public/images/foodDrive/FoodDrive2022_01.jpg";
-import PicnicA from "../../public/images/Picnic/Picnic2021_1.jpg";
-import ToyDriveA from "../../public/images/toyDrive/ToyDrive2021_01.jpg";
+import PicnicA from "../../public/images/Picnic/Picnic2024.jpg";
+import ToyDriveA from "../../public/images/toyDrive/ToyDrive2024.jpg";
 import TreePlantationA from "../../public/images/tree_plantation/tree_plantation_a.jpeg";
 
 export interface Member {
@@ -95,12 +95,17 @@ const FEATURED_EVENTS: EventDetail[] = [
   {
     image: ToyDriveA,
     amount: 0,
-    description:
-      "Our community toy drive is a wonderful way to bring joy and warmth to children during the holiday season.",
+    description: `
+      Like every year, Sankalpa proudly hosted its annual Toy Drive, spreading joy and hope to children in need. 
+      During this special holiday season, we invite our wonderful community to come together and make a difference. 
+      By donating new, unwrapped toys, you can bring happiness to a child who deserves to feel special and cherished. 
+      With the support of generous neighbors and kind-hearted individuals, we continue to brighten the season for countless 
+      children—because every child deserves the magic of play!
+    `,
     donarsCount: 10,
     isContribution: true,
     isDonation: false,
-    label: "Toy Drive 2021",
+    label: "Toy Drive 2024",
   },
   {
     image: FvRunA,
@@ -115,12 +120,19 @@ const FEATURED_EVENTS: EventDetail[] = [
   {
     image: PicnicA,
     amount: 0,
-    description:
-      "Our annual Summer Picnic is a fun-filled fundraising and meet-and-greet event that brings together both our current members and potential new ones.",
+    description: `What better way to enjoy the sunshine than a Summer Picnic with Purpose? Sankalpa
+organizes a day of fun, friendship, and environmental action!
+Meet fellow environmental enthusiasts and strengthen our community. Learn how you can
+contribute to sustainability efforts and become a part of our organization. Bring your friends,
+share delicious food, and participate in eco-friendly activities that support our cause.Experience
+the beauty we strive to protect while engaging in meaningful discussions about our initiatives.
+Whether you're already involved or just curious, this is a great opportunity to relax, connect,
+and make an impact. Come for the picnic, stay for the mission—because together, we can
+create a greener, more sustainable future!`,
     donarsCount: 10,
     isContribution: true,
     isDonation: false,
-    label: "Picnic 2021",
+    label: "Picnic 2024",
   },
 ];
 
@@ -195,6 +207,41 @@ const MEMBERS: Member[] = [
     designation: "Secretary",
     imageSrc: "/images/members/bisakha.jpeg",
   },
+  {
+    name: 'Shantanu Raha',
+    designation: 'Advisor',
+    imageSrc: '/images/members/Advisor_SantanuRaha.jpeg'
+  },
+  {
+    name: 'Mahua Chakraborti',
+    designation: 'Assistant secretary',
+    imageSrc: '/images/members/AssistantSecetary_MahuaChakraborti.jpeg'
+  },
+  {
+    name: 'Anjanita Das',
+    designation: 'Member',
+    imageSrc: '/images/members/Member_AnjanitaDas.jpeg'
+  },
+  {
+    name: 'Kakoli Bhattacharyya',
+    designation: 'Member',
+    imageSrc: '/images/members/Member_Kakoli_Bhattacharyya.jpeg'
+  },
+  {
+    name: 'Koyeli Mukherjee',
+    designation: 'Member',
+    imageSrc: '/images/members/Member_KoyeliMukherjee.jpeg'
+  },
+  {
+    name: 'Manas Bhattacharyya',
+    designation: 'Member',
+    imageSrc: '/images/members/Member_ManasBhattacharyya.jpeg'
+  },
+  {
+    name: 'Uma Venkateswaran',
+    designation: 'Member',
+    imageSrc: '/images/members/UmaVenkateswaran.jpeg'
+  }
 ];
 
-export { CASUE_ITEMS, FEATURED_EVENTS, VOLUNTEER_ITEMS, MEMBERS };
+export { CASUE_ITEMS, FEATURED_EVENTS, MEMBERS, VOLUNTEER_ITEMS };

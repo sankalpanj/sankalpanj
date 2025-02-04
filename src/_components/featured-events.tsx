@@ -18,7 +18,7 @@ function FeaturedEvents() {
       <div className="flex h-full w-full md:w-3/5 lg:w-4/5 p-2 md:p-0">
         <div className="flex flex-col h-full w-full gap-16 items-center">
           <h3 className="font-semibold">Featured Events</h3>
-          <div className="grid gap-10 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+          <div className="flex flex-col md:flex-row w-full gap-5">
             {FEATURED_EVENTS.map((event, idx) => {
               return <RenderEventItem eventDetail={event} key={idx}/>;
             })}
