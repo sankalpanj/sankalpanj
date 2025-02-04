@@ -208,7 +208,11 @@ function MembershipForm({ open, close }: Props) {
           membershipStartDate: new Date().toISOString(),
           membershipEndDate: "",
           amount: 0,
-          paymentDate: ""
+          paymentDate: "",
+          stripeCustomerId: "", 
+          stripeSubscriptionId: "", 
+          stripePlanId: "", 
+          stripeProductId: "", 
         },
       },
       {
