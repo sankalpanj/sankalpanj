@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function SuccessPage() {
   const [status, setStatus] = useState("loading");
@@ -36,20 +36,36 @@ export default function SuccessPage() {
   }, [sessionId]);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
   }
 
   if (status === "failed") {
-    return <div>Failed to process subscription. Please try again.</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div>Failed to process subscription. Please try again.</div>
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col items-center min-h-screen pt-28">
-      <h1>Subscription Successful!</h1>
-      <p>
-        Thank you for your subscription. A confirmation email has been sent to{" "}
-        {customerEmail}.
-      </p>
-    </div>
+    <React.Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+        </div>
+      }
+    >
+      <div className="flex flex-col items-center min-h-screen pt-28">
+        <h1>Subscription Successful!</h1>
+        <p>
+          Thank you for your subscription. A confirmation email has been sent to{" "}
+          {customerEmail}.
+        </p>
+      </div>
+    </React.Suspense>
   );
 }
