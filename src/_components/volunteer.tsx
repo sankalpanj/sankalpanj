@@ -1,4 +1,4 @@
-import { VOLUNTEER_ITEMS } from "@/lib/constants";
+
 import Image, { StaticImageData } from "next/image";
 
 export interface VolunteerDetail {
@@ -48,7 +48,7 @@ function Volunteer() {
       <div className="flex flex-col h-full w-full p-2 md:w-3/5 lg:w-4/5 md:p-0 items-center gap-10">
         <h3 className="font-semibold">Meet Our Volunteers</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {VOLUNTEER_ITEMS.map((item, index) => {
+          {/* {VOLUNTEER_ITEMS.map((item, index) => {
             return (
               <RenderVolunteerCard
                 key={index}
@@ -60,7 +60,7 @@ function Volunteer() {
                 image={item.image}
               />
             );
-          })}
+          })} */}
         </div>
       </div>
     </section>
