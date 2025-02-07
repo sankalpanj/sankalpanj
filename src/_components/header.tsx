@@ -1,6 +1,7 @@
 "use client";
 
 import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -61,9 +62,17 @@ function Header() {
       }`}
     >
       <div className="flex min-h-14 w-full md:w-3/5 lg:w-4/5 p-3 md:p-0 justify-between items-center m-2">
-        <Link href={"/"} className={`font-semibold text-xl`}>
-          Sankalpa USA
-        </Link>
+        <div className="flex gap-5 items-center">
+          <Image
+            width={40}
+            height={40}
+            alt="brand-logo"
+            src={"/images/sankalpa_logo.png"}
+          />
+          <Link href={"/"} className={`font-semibold text-xl`}>
+            Sankalpa USA
+          </Link>
+        </div>
         <nav className="hidden md:block w-auto">
           <ul className={`flex w-auto gap-6 group items-center font-semibold`}>
             <li>

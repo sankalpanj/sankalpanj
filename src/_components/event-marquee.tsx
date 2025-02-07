@@ -4,7 +4,7 @@ import React from "react";
 
 const LatestEvent: React.FC = () => {
   return (
-    <div className="absolute h-20 bg-blue-300 transition-all delay-200 top-0 right-0 mt-28 z-50 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-40 border-none rounded-tl-lg rounded-bl-lg shadow-lg p-3">
+    <div className="absolute h-20 bg-teal-700 transition-all delay-200 top-0 right-0 mt-28 z-50 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-55 border-none rounded-tl-lg rounded-bl-lg shadow-lg p-3">
       <Link className="flex w-full gap-5" href={"/events"}>
         <Image
           src={"/images/5kRun/logo.png"}

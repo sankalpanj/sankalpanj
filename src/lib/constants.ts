@@ -1,9 +1,7 @@
 import { EventDetail } from "@/_components/featured-events";
 import { CauseItem } from "@/_components/major-causes";
-import { VolunteerDetail } from "@/_components/volunteer";
 import FvRunA from "../../public/images/5kRun/5KRun_1.jpg";
 import BiodiversityImpvA from "../../public/images/biodiversity/biodiversity_a.jpeg";
-import BiodiversityImpvB from "../../public/images/biodiversityImpvB.jpg";
 import FoodDriveA from "../../public/images/foodDrive/FoodDrive2022_01.jpg";
 import PicnicA from "../../public/images/Picnic/Picnic2024.jpg";
 import ToyDriveA from "../../public/images/toyDrive/ToyDrive2024.jpg";
@@ -33,51 +31,6 @@ const CASUE_ITEMS: CauseItem[] = [
     description:
       "Our community food drive is a powerful initiative that brings neighbors together to support those in need. By collecting and donating non-perishable items, we are able to provide essential nourishment to families facing food insecurity.",
     image: FoodDriveA,
-  },
-];
-
-const VOLUNTEER_ITEMS: VolunteerDetail[] = [
-  {
-    image: BiodiversityImpvB,
-    brief:
-      "sdflkjaslkfdjlsdja fljsdlfkjlsd jfsjdaljdskl fjsldkfjlsj dfjlsafjdljsdlkfjsdljf lksdjfl",
-    designation: "CEO",
-    firstName: "Test",
-    lastName: "User",
-    socialLinks: {
-      facebook: "",
-      linkedIn: "",
-      twitter: "",
-      youtube: "",
-    },
-  },
-  {
-    image: BiodiversityImpvB,
-    brief:
-      "sdflkjaslkfdjlsdja fljsdlfkjlsd jfsjdaljdskl fjsldkfjlsj dfjlsafjdljsdlkfjsdljf lksdjfl",
-    designation: "CEO",
-    firstName: "Test",
-    lastName: "User",
-    socialLinks: {
-      facebook: "",
-      linkedIn: "",
-      twitter: "",
-      youtube: "",
-    },
-  },
-  {
-    image: BiodiversityImpvB,
-    brief:
-      "sdflkjaslkfdjlsdja fljsdlfkjlsd jfsjdaljdskl fjsldkfjlsj dfjlsafjdljsdlkfjsdljf lksdjfl",
-    designation: "CEO",
-    firstName: "Test",
-    lastName: "User",
-    socialLinks: {
-      facebook: "",
-      linkedIn: "",
-      twitter: "",
-      youtube: "",
-    },
   },
 ];
 
@@ -138,14 +91,24 @@ create a greener, more sustainable future!`,
 
 const MEMBERS: Member[] = [
   {
+    name: "Anamika Banerjee",
+    designation: "President",
+    imageSrc: "/images/members/anmk_bnj_presd.jpeg",
+  },
+  {
     name: "Nemai Ghosh",
     designation: "Vice President & Treasurer",
     imageSrc: "/images/members/ng_vp_t.jpeg",
   },
   {
-    name: "Rini Ganguly",
-    designation: "Advisor",
-    imageSrc: "/images/members/rg_adv.jpeg",
+    name: "Bishakha Ghoshal",
+    designation: "Secretary",
+    imageSrc: "/images/members/bisakha.jpeg",
+  },
+  {
+    name: "Mahua Chakraborti",
+    designation: "Assistant Secretary",
+    imageSrc: "/images/members/AssistantSecetary_MahuaChakraborti.jpeg",
   },
   {
     name: "Venky Neelakantan",
@@ -153,9 +116,19 @@ const MEMBERS: Member[] = [
     imageSrc: "/images/members/vkn_chief_env_of.jpeg",
   },
   {
-    name: "Sukanya Ghosh",
-    designation: "Member",
-    imageSrc: "/images/members/sk_gh.jpeg",
+    name: "Rini Ganguly",
+    designation: "Advisor",
+    imageSrc: "/images/members/rg_adv.jpeg",
+  },
+  {
+    name: "Shantanu Dev",
+    designation: "Advisor",
+    imageSrc: "/images/members/sh_dev.jpeg",
+  },
+  {
+    name: "Shantanu Raha",
+    designation: "Advisor",
+    imageSrc: "/images/members/Advisor_SantanuRaha.jpeg",
   },
   {
     name: "Ajit Parhi",
@@ -163,9 +136,14 @@ const MEMBERS: Member[] = [
     imageSrc: "/images/members/aj_ph.jpeg",
   },
   {
-    name: "Anamika Banerjee",
-    designation: "President",
-    imageSrc: "/images/members/anmk_bnj_presd.jpeg",
+    name: "Anjanita Das",
+    designation: "Member",
+    imageSrc: "/images/members/Member_AnjanitaDas.jpeg",
+  },
+  {
+    name: "Ayona Biswas",
+    designation: "Member",
+    imageSrc: "/images/members/ay_bsw.jpeg",
   },
   {
     name: "Biswajit Santra",
@@ -178,14 +156,14 @@ const MEMBERS: Member[] = [
     imageSrc: "/images/members/Gng_dey.jpeg",
   },
   {
-    name: "Ayona Biswas",
+    name: "Jaya Chakrabarti",
     designation: "Member",
-    imageSrc: "/images/members/ay_bsw.jpeg",
+    imageSrc: "/images/members/jaya.jpeg",
   },
   {
-    name: "Shantanu Dev",
-    designation: "Advisor",
-    imageSrc: "/images/members/sh_dev.jpeg",
+    name: "Kakoli Bhattacharyya",
+    designation: "Member",
+    imageSrc: "/images/members/Member_Kakoli_Bhattacharyya.jpeg",
   },
   {
     name: "Koustav Ghosal",
@@ -193,55 +171,30 @@ const MEMBERS: Member[] = [
     imageSrc: "/images/members/kv_gh.jpeg",
   },
   {
+    name: "Koyeli Mukherjee",
+    designation: "Member",
+    imageSrc: "/images/members/Member_KoyeliMukherjee.jpeg",
+  },
+  {
+    name: "Manas Bhattacharyya",
+    designation: "Member",
+    imageSrc: "/images/members/Member_ManasBhattacharyya.jpeg",
+  },
+  {
+    name: "Sukanya Ghosh",
+    designation: "Member",
+    imageSrc: "/images/members/sk_gh.jpeg",
+  },
+  {
     name: "Suvendra Chakrabarti",
     designation: "Member",
     imageSrc: "/images/members/suvendra.jpeg",
   },
   {
-    name: "Jaya Chakrabarti",
+    name: "Uma Venkateswaran",
     designation: "Member",
-    imageSrc: "/images/members/jaya.jpeg",
+    imageSrc: "/images/members/UmaVenkateswaran.jpeg",
   },
-  {
-    name: "Bishakha Ghoshal",
-    designation: "Secretary",
-    imageSrc: "/images/members/bisakha.jpeg",
-  },
-  {
-    name: 'Shantanu Raha',
-    designation: 'Advisor',
-    imageSrc: '/images/members/Advisor_SantanuRaha.jpeg'
-  },
-  {
-    name: 'Mahua Chakraborti',
-    designation: 'Assistant secretary',
-    imageSrc: '/images/members/AssistantSecetary_MahuaChakraborti.jpeg'
-  },
-  {
-    name: 'Anjanita Das',
-    designation: 'Member',
-    imageSrc: '/images/members/Member_AnjanitaDas.jpeg'
-  },
-  {
-    name: 'Kakoli Bhattacharyya',
-    designation: 'Member',
-    imageSrc: '/images/members/Member_Kakoli_Bhattacharyya.jpeg'
-  },
-  {
-    name: 'Koyeli Mukherjee',
-    designation: 'Member',
-    imageSrc: '/images/members/Member_KoyeliMukherjee.jpeg'
-  },
-  {
-    name: 'Manas Bhattacharyya',
-    designation: 'Member',
-    imageSrc: '/images/members/Member_ManasBhattacharyya.jpeg'
-  },
-  {
-    name: 'Uma Venkateswaran',
-    designation: 'Member',
-    imageSrc: '/images/members/UmaVenkateswaran.jpeg'
-  }
 ];
 
-export { CASUE_ITEMS, FEATURED_EVENTS, MEMBERS, VOLUNTEER_ITEMS };
+export { CASUE_ITEMS, FEATURED_EVENTS, MEMBERS };
