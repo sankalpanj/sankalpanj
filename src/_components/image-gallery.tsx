@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function ImageGallery() {
   return (
-    <div className="container mx-auto px-5 py-2 lg:pr-32 lg:pt-24 w-3/5">
+    <div className="container mx-auto px-5 py-2 w-3/5">
       <div className="-m-1 flex flex-wrap md:-m-2">
         <div className="flex w-1/2 flex-wrap">
           <div className="w-1/2 p-1 md:p-2">

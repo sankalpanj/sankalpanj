@@ -57,9 +57,7 @@ function Header() {
 
   return (
     <header
-      className={`flex h-auto w-full md:p-0 z-[999] bg-[#091b27] text-white transition-all duration-200 justify-center ${
-        !scrolledToTop ? `fixed top-0` : "bg-[#091b27]"
-      }`}
+      className={`flex h-auto w-full md:p-0 z-[999] bg-[#091b27] text-white transition-all duration-200 justify-center fixed top-0`}
     >
       <div className="flex min-h-14 w-full md:w-3/5 lg:w-4/5 p-3 md:p-0 justify-between items-center m-2">
         <div className="flex gap-5 items-center">

@@ -27,7 +27,7 @@ function RenderCauseItems({ label, image, description }: CauseItem) {
 
 function MajorCauses() {
   return (
-    <section className="flex w-full h-full justify-center py-16 md:py-32">
+    <section className="flex w-full h-full justify-center py-16 md:py-20">
       <div className="flex h-full w-full md:w-3/5 lg:w-4/5 p-2 md:p-0">
         <div className="flex flex-col h-full w-full gap-10 items-center">
           <h3 className="font-semibold">Our major causes</h3>
