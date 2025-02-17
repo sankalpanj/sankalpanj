@@ -151,6 +151,11 @@ const MEMBERS: Member[] = [
     imageSrc: "/images/members/bs_snt.jpeg",
   },
   {
+    name: "Chaiti Banerjee",
+    designation: "Member",
+    imageSrc: "/images/members/ChaitaiBanerjee.jpeg",
+  },
+  {
     name: "Gangotri Dey",
     designation: "Member",
     imageSrc: "/images/members/Gng_dey.jpeg",
@@ -179,6 +184,11 @@ const MEMBERS: Member[] = [
     name: "Manas Bhattacharyya",
     designation: "Member",
     imageSrc: "/images/members/Member_ManasBhattacharyya.jpeg",
+  },
+  {
+    name: "Somak Bhattacharya",
+    designation: "Member",
+    imageSrc: "/images/members/SomakBhattacharya.jpeg",
   },
   {
     name: "Sukanya Ghosh",
