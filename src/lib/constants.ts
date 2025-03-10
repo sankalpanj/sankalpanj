@@ -1,6 +1,6 @@
 import { EventDetail } from "@/_components/featured-events";
 import { CauseItem } from "@/_components/major-causes";
-import FvRunA from "../../public/images/5kRun/5KRun_1.jpg";
+// import FvRunA from "../../public/images/5kRun/5KRun_1.jpg";
 import BiodiversityImpvA from "../../public/images/biodiversity/biodiversity_a.jpeg";
 import FoodDriveA from "../../public/images/foodDrive/FoodDrive2022_01.jpg";
 import PicnicA from "../../public/images/Picnic/Picnic2024.jpg";
@@ -60,16 +60,16 @@ const FEATURED_EVENTS: EventDetail[] = [
     isDonation: false,
     label: "Toy Drive 2024",
   },
-  {
-    image: FvRunA,
-    amount: 0,
-    description:
-      "We have conducted several food drives for the Plainsboro Pantry with generous donations from our patrons.",
-    donarsCount: 10,
-    isContribution: true,
-    isDonation: false,
-    label: "5K Run 2024",
-  },
+  // {
+  //   image: FvRunA,
+  //   amount: 0,
+  //   description:
+  //     "We have conducted several food drives for the Plainsboro Pantry with generous donations from our patrons.",
+  //   donarsCount: 10,
+  //   isContribution: true,
+  //   isDonation: false,
+  //   label: "5K Run 2024",
+  // },
   {
     image: PicnicA,
     amount: 0,
